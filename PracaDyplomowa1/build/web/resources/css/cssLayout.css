@@ -1,0 +1,186 @@
+
+#top {
+    position: relative;
+    background-color: #000099;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+    background: linear-gradient(#696969,#28a428); /*gradient liniowy (szary z zielonym ) */
+    border-radius: 15px 15px 15px 15px;
+    /*background: 		#28a428; */
+    padding: 20px; 
+    height: 50px; 
+}
+
+#rcorners3 {
+    border-radius: 1px 1px 15px 15px;  
+    background: url(fakro4.jpg);
+    background-position: left top;
+    background-repeat: repeat;
+    width: 200px;
+    height: 50px; 
+    opacity: 0.5;
+}
+#rcorners4 {
+    border-radius: 1px 1px 15px 15px; 
+    background-position:  top;
+    background-repeat: repeat;
+    height: 100px; 
+    opacity: 1;
+    float: next;
+    min-width: 150px; 
+    width: 100px;
+    margin-left: 100px;
+    
+
+}
+#account1 {
+    border-radius: 10px 10px 15px 15px; 
+    background-position: center center;
+    padding: 15px;
+    width: 170px;
+    height: 130px;
+    border-radius: 15px 15px 15px 15px;
+    /*box-shadow:20px 20px 50px 5px #262626;*/
+
+    /*border: 3px solid 	#28a428*/
+    background-color: 	#4d4d4d;
+}
+#account2 {
+    background-position: center center;
+    padding: 15px;
+    width: 170px;
+    height: 130px;
+    border-radius: 15px 15px 15px 15px;
+    /*box-shadow:20px 20px 50px 5px #262626;*/
+    /*border: 3px solid 	#28a428*/
+    background-color: 	#4d4d4d;
+}
+
+#bottom {
+    position:fixed;
+    background: linear-gradient(#696969,#28a428);
+    padding: 5px;
+    margin: 0px 0px 0px 0px;
+    border-radius: 10px 10px 10px 10px;
+    bottom:0px;
+    height: 40px;
+    
+    
+    width: 98%;
+    /*width: max-content;*/
+}
+
+#left {
+    float: left;
+    padding: 5px;
+    width: 300px;
+    border-radius: 15px 15px 15px 15px;
+    border: 3px solid 	#28a428
+
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    position: relative;
+    background-color: #dddddd;
+    padding: 20px;
+    border-radius: 15px 15px 15px 15px;
+    height: 400px;
+}
+
+.left_content {
+    background-color: #dddddd;
+    padding: 30px;
+    margin-left: 330px;
+    border-radius: 15px 15px 15px 15px;
+    height: 400px;
+    
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+    border-radius: 15px 15px 15px 15px;
+}
+
+#top a:link, #top a:visited {
+    color: white;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+    color: black;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 26px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+
+    background-color: white;
+    color: black;
+    border: 3px solid #4CAF50;
+    border-radius: 10px 10px 10px 10px;
+
+}
+
+/*// Przenikanie*/
+.button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+#img {
+    display: block;
+    margin: auto;
+    width: 5%;
+}
+
+#wrap {
+    width: auto;
+    position: relative;
+}
+
+.left{
+    width: 300px; 
+    float: left;
+    margin: auto;
+}
+.right2{
+    width: 300px; 
+    float: left;
+    margin: auto;
+}
+
+.center {
+    float: left;
+    min-width: 300px; 
+    width: auto;
+    margin: auto;
+}
+
+.clearBoth {
+    clear: both;
+}
+

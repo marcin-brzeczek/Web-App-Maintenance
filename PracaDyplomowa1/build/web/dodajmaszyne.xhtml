@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:composition template="./template.xhtml">
+        <ui:define name="top">
+            <h2>Dodawanie Maszyny do Bazy</h2>
+            <img id="rcorners3" src="resources/images/fakro4.jpg"  width="250" height="50" align="right" /> 
+        </ui:define>
+
+        <ui:define name="left">
+
+            <li><h:outputLink value="zarzadzanieur.xhtml">Powrót do Menu</h:outputLink></li> 
+
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form>
+                <!--            <h:outputText  id="komunikat"/>
+                            <table>
+                                    <tr><td>Nazwa Linii</td><td><h:inputText id="nazwa"
+                                                                  value="#{maszynaBean.maszyna.nazwaLinii}" required="true"
+                                                                  /></td></tr>
+                  
+                                           PrimeFaces    wiadomości (komunikaty o błędach)-->
+                <p:messages/>  
+                <p:panel header="Wprowadzanie danych Maszyny" >
+                    <h:panelGrid columns="2">
+
+                        <h:outputLabel for="NameOfLine" value="Nazwa Linii"
+                                       styleClass="requiredLbl" />
+                        <h:inputText id="NameOfLine" label="Nazwa Linii"
+                                     value="#{maszynaBean.maszyna.nazwaLinii}"
+                                     required="true"/>
+
+                        <h:outputLabel for="NameOfMachine" value="Nazwa Maszyny"
+                                       styleClass="requiredLbl" />
+                        <h:inputText id="NameOfMachine" label="Nazwa Maszyny"
+                                     value="#{maszynaBean.maszyna.nazwaMaszyny}" 
+                                     required="true" />
+                      
+
+                        <h:outputLabel for="AvailOfMachine" value="Dostępność Maszyny"
+                                       styleClass="requiredLbl" />
+                        <h:inputText id="AvailOfMachine" label="Dostępność Maszyny"
+                                     value="#{maszynaBean.maszyna.dostepnosc}" 
+                                     required="true" />
+                        
+                        <h:panelGroup/>
+                        
+                        <p:commandButton value="Dodaj"
+                                         action="#{maszynaBean.dodaj}"
+                                         ajax="false"/>
+
+
+                        <!--Zwykły Odstęp-->
+
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="bottom">
+            <h4    align="center" >Created by Marcin Brzeczek</h4>
+        </ui:define>
+
+    </ui:composition>
+</html>

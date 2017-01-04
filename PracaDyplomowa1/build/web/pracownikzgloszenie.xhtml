@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="./template.xhtml">
+        <ui:define name="top">
+            <h2>Wprowadzenie nowego zgłoszenia awarii</h2>
+            <img id="rcorners3" src="resources/images/fakro4.jpg"  width="250" height="50" align="right" /> 
+            
+              <!--<script style="font-family:tahoma;" type="text/javascript"  library="js" src="timer.js"></script>-->
+              
+              <!--<h:outputScript library="js" name="timer.js"/>-->
+        <!--<body onload="odliczanie();">-->
+
+            <!--<div id="zegar"></div>-->
+
+     
+
+        <!--</body>-->
+        </ui:define>
+        <ui:define name="left">
+            
+        </ui:define>
+
+
+        <ui:define name="content">
+            <h:form id="form" >
+                <h:panelGrid columns="1" style="width: 80%" >
+                    <p:wizard id="wizard">
+                        <p:tab title="KROK 1: Wybór linii produkcyjnej" id="lineProduction">
+                            <p:panel header="Dane linii produkcyjnej">
+                                <p:messages/>
+                                <h:panelGrid columns="1" >
+
+                                    <br></br>
+                                    <h:outputLabel  value="Wybierz linię produkcyjną:" styleClass="requiredLbl"/>
+                                    <!-- zmienić na selectOneMenu -->    
+
+                                    <p:selectOneMenu id="gp" value="#{gp.lineProduction}" required="true"
+                                                     label="Nie wybrana żadna linia produkcyjna" styleClass="requiredLbl" >
+                                        <f:selectItem itemLabel="" itemValue="" />
+
+                                        <f:selectItems value="#{gp.lin}"
+
+                                                       var="p" itemValue="#{p}"  itemLabel="#{p}">
+                                        </f:selectItems>
+
+                                    </p:selectOneMenu>
+
+                                    <h:outputLabel for="jakies" value=""  />
+
+
+                                </h:panelGrid>
+
+                            </p:panel>
+                        </p:tab>
+
+                        <p:tab title="KROK 2: Wybór maszyny" >
+                            <p:panel header="Wybór maszyny">
+                                <h:panelGrid columns="1">
+                                    <h:outputText id="nowy" value="Wybrana została #{gp.lineProduction} "
+                                                  styleClass="optionalLbl"/> 
+                                    <p:column>
+                                        <p:graphicImage value="/resources/images/#{gp.lineProduction}.jpg" />  
+                                    </p:column>  
+                                    <br></br>
+                                    <h:outputLabel for="machineId" value="Wybierz maszynę/gniazdo"
+                                                   styleClass="requiredLbl"/>
+                                    <p:messages/>
+
+
+                                    <p:selectOneMenu id="gpMachine" value="#{gp.machineProduction}" required="true"
+                                                     label="Nie została wybrana żadna maszyna" >
+
+                                        <f:selectItem itemLabel="" itemValue="" />
+                                        <c:choose>
+                                            <!--wybierz gdy chodzi o maszyny Lenhardta-->
+                                            <c:when test="#{gp.lineProduction=='Linia Lenhardt'}">
+                                                <f:selectItems value="#{gp.lenMach}" var="m"
+                                                               itemLabel="#{m}" itemValue="#{m}"/>
+                                            </c:when>
+                                            <!--wybierz jesli chodzi o maszyny Lisec-->
+                                            <c:when test="#{gp.lineProduction=='Linia Lisec'}">
+                                                <f:selectItems value="#{gp.lisMach}" var="l"
+                                                               itemLabel="#{l}" itemValue="#{l}"/>
+
+                                            </c:when>
+                                        </c:choose>
+                                    </p:selectOneMenu>
+
+
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:tab>
+
+                        <p:tab title="KROK 3: Opis Awarii" >
+                            <p:panel header="Opis Awarii">
+                                <h:outputScript library="js" name="calendar_pl.js" />
+                                <p:messages/>
+                                <h:panelGrid columns="1">
+                                    <h:outputText value="Linia: #{gp.lineProduction}"
+                                                  styleClass="optionalLbl"/>
+                                    <h:outputText value="Maszyna :#{gp.machineProduction}"
+                                                  styleClass="optionalLbl"/>
+
+                                    <p:column>
+                                        <p:graphicImage value="/resources/images/#{gp.machineProduction}.jpg" />  
+                                    </p:column>  
+                                    <h:panelGrid columns="2" >
+
+                                        <h:outputText value="Czy jest przestój maszyny?" 
+                                                      styleClass="requiredLbl"/>
+                                        <h:selectOneMenu  id="st"   required="true" value="#{gp.statusMachine}" >
+                                            <f:selectItem itemLabel="" itemValue="" />
+                                            <f:selectItem itemLabel="Tak" itemValue="TAK" />
+                                            <f:selectItem itemLabel="Nie" itemValue="NIE" />
+                                        </h:selectOneMenu>
+                                        <h:outputText value="Data zatrzymania maszyny:"/>
+
+                                        <p:calendar  id="birthDate" value="#{gp.machineStop}"
+                                                     showOn="button" navigator="true"
+                                                     style="width: 100px" pattern="dd/MM/yyyy hh:mm"
+                                                     locale="pl" effect="explode"/>
+
+                                    </h:panelGrid>
+                                    <h:outputText value="Opis awarii" 
+                                                  styleClass="requiredLbl"/>
+                                    <h:inputTextarea value="#{gp.desc}" rows="7"  cols="100"/>
+
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:tab>
+
+
+                        <!--                      // Zostało do napisania zakładka potwierdzająca wybór i opis awarii
+                                              oraz wysyłkę maila na pocztę do serwisantów //-->
+                        <p:tab title="Potwierdzenie">
+
+                            <p:panel header="Potwierdzenie zgłoszenia" >
+
+                                    <p:messages/>
+                                <h:panelGrid  columns="1">
+                                    <h:outputText value="Linia: " />
+                                    <h:outputText value="#{gp.lineProduction}"
+                                                  styleClass="optionalLbl"/>
+                                    <h:outputText value="Maszyna: " />
+                                    <h:outputText value="#{gp.machineProduction}"
+                                                  styleClass="optionalLbl"/>
+                                    <h:outputText value="Czy postój ? :" />
+                                    <h:outputLabel value="#{gp.statusMachine}"  />
+                                   <h:outputText value="Data i godzina zatrzymania maszyny: " />
+                                   <h:outputText value="#{gp.formattedDate}" />
+                                   
+                                   
+                                   <h:outputText value="Opis awarii: " /> 
+                                   <h:outputText value="#{gp.desc}" styleClass="optionalLbl"/>
+
+                                    <!-- Test przycisku --> <h:commandButton id="butt" value="Prześlij"  styleClass="button"
+                                                                             action="#{sendEmail.sendMail}" />
+
+                                </h:panelGrid>
+
+                            </p:panel>
+
+                        </p:tab>
+
+                    </p:wizard>
+
+                </h:panelGrid>
+
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+</html>
+
+
+
+

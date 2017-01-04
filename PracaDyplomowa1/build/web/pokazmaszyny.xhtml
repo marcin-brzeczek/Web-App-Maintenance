@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    template="./template.xhtml">
+
+
+    <ui:composition template="./template.xhtml">
+
+        <ui:define name="top">
+            <h2>Lista Maszyn</h2>
+            <img id="rcorners3" src="resources/images/fakro4.jpg"  width="250" height="50" align="right" /> 
+        </ui:define>
+
+        <ui:define name="left">
+            left
+        </ui:define>
+
+        <ui:define name="content">
+            <h1>Lista Maszyn</h1>
+            <h:form id="form">
+                <p:dataTable rows="10"  value="#{maszynaBean.lista}" var="maszyna"> 
+
+                    <p:column headerText="Edycja" >
+                                <h:commandLink value="Edytuj"
+                                               action="#{maszynaBean.zaladujDoEdycji}"
+                                               actionListener="#{maszynaBean.maszynaListener}">
+                                    <f:param name="maszynaID"
+                                             value="#{maszyna.id}"/>
+                                </h:commandLink>
+                    </p:column> 
+
+                    <p:column  headerText="Usuwanie">
+                                <h:commandLink value="Usun"
+                                               action="#{maszynaBean.usun}"
+                                               actionListener="#{maszynaBean.maszynaListener}">
+                                    <f:param name="maszynaID"
+                                             value="#{maszyna.id}"/>
+
+                                </h:commandLink>
+                    </p:column>
+                    <p:column  headerText="ID">
+                        <h:outputText value="#{maszyna.id}" />
+                    </p:column>
+                    <p:column  headerText="Nazwa Linii" >
+                        <h:outputText value="#{maszyna.nazwaLinii}" />
+                    </p:column>
+                    <p:column  headerText="Nazwa Maszyny" sortBy="#{maszyna.nazwaMaszyny}" filterBy="#{maszyna.nazwaMaszyny}">
+                        <h:outputText value = "#{maszyna.nazwaMaszyny}" />
+                    </p:column>
+                    <p:column  headerText="Dostepność">
+                        <h:outputText value="#{maszyna.dostepnosc}" />
+                    </p:column>
+
+                    <p:column headerText="Dokumentacja" >
+                    <!-- Pobranie dokumentacji Uwaga narazie pobiera tylko jedno pole TRZEBA ZMODYFIKOWAĆ-->
+
+                                <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+                                    <p:graphicImage value="/resources/images/loading.gif" />
+                                </p:dialog>
+
+                                <!--<h:form>-->
+                                    <p:commandButton  value="Pobierz" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-2-s"
+                                      >
+                                       <!--Spróbować wyszukać po ID Maszyny Dokentacji-->
+
+                                       <p:fileDownload value="#{downloadBean.download(maszyna.id)}" /> 
+                                    </p:commandButton>
+                                <!--</h:form>-->
+
+                                <script type="text/javascript">
+                                    function start() {
+                                        PF('statusDialog').show();
+                                    }
+
+                                    function stop() {
+                                        PF('statusDialog').hide();
+                                    }
+                                </script>
+                  
+                    </p:column>
+
+
+
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="bottom">
+            bottom
+        </ui:define>
+
+    </ui:composition>
+
+</html>

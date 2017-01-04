@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:composition template="./template.xhtml">
+        <ui:define name="top">
+            <h2>SYSTEM ZGŁASZANIA AWARII</h2>
+            <img id="rcorners3" src="resources/images/fakro4.jpg"  width="250" height="50" align="right" /> 
+
+            <!--<script style="font-family:tahoma;" type="text/javascript"  library="js" src="timer.js"></script>-->
+
+            <!--<h:outputScript library="js" name="timer.js"/>-->
+            <!--<body onload="odliczanie();">-->
+
+            <!--<div id="zegar"></div>-->
+
+
+            <!--</body>-->
+        </ui:define>
+        <ui:define name="left">
+            <h:outputScript id="left" library="js" name="timer.js"/>
+            <body   onload="odliczanie();">
+
+                <div id="zegar"></div>
+            </body>
+
+            <h5>Zgłoszenie Awarii - konto pracownika produkcji. Do tego konta
+                logują się pracownicy chcący zgłosić awarię maszyny</h5>
+            <h5>Podgląd Awarii - konto pracownika UR. Do tego konta logują się pracownicy UR
+                w celu podglądnięcia zadania jakim jest usunięcie awarii</h5>
+            <h5>Zarządzanie awarią - konto Managera UR. Do tego konta loguje się osoba zarządzająca
+                pracownikami UR w celu monitorowania awarii i przydzielenia osoby do usunięcia awarii </h5>
+              <img   id="rcorners4" src="resources/images/figure.gif" height="150" />
+        </ui:define>
+
+        <!--Zawartosc-->
+
+        <ui:define name="content" >
+
+            <div id="wrap">
+                <div class="left" >
+
+                    <h:form >            
+                        <h:outputLink value="javascript:void(0)" onclick="PF('dlg0').show();" title="Pracownik Produkcji">
+                            <h3>Zgłoszenie Awarii</h3>
+                            <br/>
+                            <img  id="account2" src="resources/images/zgloszenie.png" />
+                        </h:outputLink>
+
+                        <p:growl id="growl1" sticky="true" showDetail="true" life="3000" />
+
+                        <p:dialog header="Pracownik Produkcji" widgetVar="dlg0" resizable="false">
+                            <h:panelGrid columns="2" cellpadding="10">
+                                <h:outputLabel for="username" value="Username:" />
+                                <p:inputText id="username" value="#{pracownikGPLoginView.username}" required="true" label="Login jest wymagany" />
+
+                                <h:outputLabel for="password" value="Password:" />
+                                <p:password id="password" value="#{pracownikGPLoginView.password}" required="true" label="Hasło jest wymagane" />
+
+                                <f:facet name="footer">
+                                    <p:commandButton value="Login" update="growl1" actionListener="#{pracownikGPLoginView.login}"
+                                                     action="#{pracownikGPLoginView.pageoperator}"
+
+                                                     oncomplete="handleLoginRequest(xhr, status, args)" />
+                                </f:facet>  
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                </div>
+                <div class="center" >  
+
+                    <h:form >            
+                        <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="Pracownik UR">
+                            <h3>Podgląd Awarii</h3>
+                            <br/>
+                            <!-- id="account1" oznacza odwołanie się do css w cssLayout.css do #account1 
+                            natomiast scr wskazuje na źródło zdjecia -->
+                            <img  id="account1"  src="resources/images/maintenace.jpg" />
+
+                        </h:outputLink>
+
+                        <p:growl id="growl2" sticky="true" showDetail="true" life="3000" />
+
+                        <p:dialog header="Pracownik UR" widgetVar="dlg" resizable="false">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel for="username" value="Username:" />
+                                <p:inputText id="username" value="#{pracownikURLoginView.username}" required="true" label="Login jest wymagany" />
+
+                                <h:outputLabel for="password" value="Password:" />
+                                <p:password id="password" value="#{pracownikURLoginView.password}" required="true" label="Hasło jest wymagane" />
+
+                                <f:facet name="footer">
+                                    <p:commandButton value="Login" update="growl2" actionListener="#{pracownikURLoginView.login}"
+                                                     action="#{pracownikURLoginView.pageoperator}"
+
+                                                     oncomplete="handleLoginRequest(xhr, status, args)" />
+                                </f:facet>  
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                </div>
+
+                <div class="right2" >  
+
+                    <h:form >            
+                        <h:outputLink value="javascript:void(0)" onclick="PF('dlg1').show();" title="Manager UR">
+                            <h3>Zarządzanie Awarią</h3>
+                            <br/>
+                            <img  id="account1"  src="resources/images/manager.png" />
+                        </h:outputLink>
+
+                        <p:growl id="growl3" sticky="true" showDetail="true" life="3000" />
+
+                        <p:dialog  header="Manager UR" widgetVar="dlg1" resizable="false">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel for="username" value="Login:" />
+                                <p:inputText id="username" value="#{managerURLoginView.username}" required="true" label="Login jest wymagany" />
+
+                                <h:outputLabel for="password" value="Hasło:" />
+                                <p:password id="password" value="#{managerURLoginView.password}" required="true" label="Hasło jest wymagane" />
+
+                                <f:facet name="footer">
+                                    <p:commandButton value="Login" update="growl3" actionListener="#{managerURLoginView.login}"
+                                                     action="#{managerURLoginView.pageoperator}"
+
+                                                     oncomplete="handleLoginRequest(xhr, status, args)" />
+                                </f:facet>  
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <!--efekt wstąpienia wyskakującego pola logowania--> 
+                    <script type="text/javascript">
+                        function handleLoginRequest(xhr, status, args) {
+                            if (args.validationFailed || !args.loggedIn) {
+                                PF('dlg0').jq.effect("shake", {times: 5}, 100);
+                                PF('dlg').jq.effect("shake", {times: 5}, 100);
+                                PF('dlg1').jq.effect("shake", {times: 5}, 100);
+                            } else {
+                                PF('dlg0').hide();
+                                PF('dlg1').hide();
+                                PF('dlg').hide();
+                                $('#loginLink').fadeOut();
+                            }
+                        }
+                    </script>
+
+
+                </div>
+                  
+
+                <div class="clearBoth"></div>
+
+            </div>
+                <br/>
+
+
+
+
+        </ui:define>
+
+        <ui:define name="bottom">
+
+            <h4    align="center" >Created by Marcin Brzeczek</h4>
+        </ui:define>
+
+    </ui:composition>
+</html>
+
+
+
+
