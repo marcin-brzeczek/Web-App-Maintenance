@@ -19,7 +19,7 @@ public class SendEmail {
 
     // Aby działało to :
     //  1. Wyłącz ochronę antywirusową
-    // 2. 
+   
     Gp gp = new Gp();
 
  
@@ -27,10 +27,10 @@ public class SendEmail {
 
     public void sendMail() {
 
-        String username = "mbrzeczek150@gmail.com";
-        String password = "Liechten11";
-        String from = "mbrzeczek150@gmail";
-        String to = "mbrzeczek150@gmail.com";
+        String username = "user@gmail.com";
+        String password = "password";
+        String from = "from@gmail";
+        String to = "to@gmail.com";
         String subject = "Zgłoszenie awarii";
         // Zawartość maila
 //        String content = gp.sendMessage();
@@ -56,8 +56,7 @@ public class SendEmail {
             Transport.send(message);
             System.out.println("Sent succesfully!");
 
-            // W rzeczywistej aplikacji należałoby zapisać dane.
-            // W tym przykładzie kod tylko wyświetla komunikat.
+       
             FacesMessage facesMessage1 = new FacesMessage("Dane zostały zapisane w bazie !");
             FacesMessage facesMessage2 = new FacesMessage("Wysłano maile do UR !");
             facesMessage1.setSeverity(FacesMessage.SEVERITY_INFO);
